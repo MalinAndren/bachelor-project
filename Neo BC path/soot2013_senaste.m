@@ -2,6 +2,8 @@ close all
 clear all
 %A=A(A(:, size(A, 2))==0, :)
 
+%this is just to show Malin what GitHub can do for her
+
 
 soot2013=load('correctedsootdata2013.dat')
 
