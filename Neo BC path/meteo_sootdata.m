@@ -5,7 +5,7 @@ clear all
 daymat=[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 meteodata1=dlmread(['meteo.dat'], '', 0, 0);
 
-meteodata1=meteodata1(meteodata1(:, size(meteodata1, 2))== -999, :);
+%meteodata1=meteodata1(meteodata1(:, size(meteodata1, 2))== -999, :);
 
 year=meteodata1(:, 3);
 month=meteodata1(:, 2);
@@ -592,16 +592,22 @@ end
 
 ftw=0
 for wd=0:5:365
-    [a]=find(wind_dir>=wd & wind_dir<wd & wind_dir(:, size(wind_dir))==0); 
-    if~isempty (a)
+    [a]=find(wind_dir>=wd)
+    [b]=find(wind_dir<wd) %& wind_dir(:, size(wind_dir))==0); 
+    if~isempty (a) & ~isempty(b)
     ftw=ftw+1;
-    elseif is empty(a)
+    outmatrix(ftw, 1:4)=wd
+    elseif is empty(a) & ~isempty(b)
         flag=0.666
         ftw=ftw+1
+    else if ~isempty(a) & isempty(b)
+            flag=0.777
+            ftw=ftw+1
+            
         
     
     
-    out_matrix(ftw, 1:2)=[wd+10/2]
+   % out_matrix(ftw, 1:2)=[wd+10/2]
   
     end
 end
